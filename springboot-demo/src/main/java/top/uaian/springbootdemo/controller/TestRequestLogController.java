@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/test")
-@CrossOrigin
+//@CrossOrigin
 public class TestRequestLogController {
 
     @RequestMapping("/request_log")
