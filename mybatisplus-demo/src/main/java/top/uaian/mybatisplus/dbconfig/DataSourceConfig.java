@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -156,6 +157,8 @@ public class DataSourceConfig {
 
     }
 
+    @Bean
+    @Primary
     DynamicDataSource dynamicDataSource() throws Exception {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object,Object> targetDataSource = new HashMap<>();
