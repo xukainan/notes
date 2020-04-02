@@ -25,6 +25,7 @@
         <module>algorithm</module>
         <module>springboot-demo</module>
         <module>mybatisplus-demo</module>
+        <module>tool</module>
     </modules>
 
 
