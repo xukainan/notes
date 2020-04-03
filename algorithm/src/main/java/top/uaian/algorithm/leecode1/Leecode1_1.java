@@ -1,6 +1,4 @@
-package top.uaian.algorithm.leecode;
-
-import org.omg.CORBA.INTERNAL;
+package top.uaian.algorithm.leecode1;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -23,7 +21,7 @@ import java.util.stream.Collectors;
  * 链接：https://leetcode-cn.com/problems/two-sum
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Leecode1 {
+public class Leecode1_1 {
     public static void main(String[] args) {
         int target = 10;
         int[] nums = new int[]{2,5,5,11};

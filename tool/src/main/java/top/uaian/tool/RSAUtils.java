@@ -37,8 +37,6 @@ public class RSAUtils {
         KeyStore keys = createKeys();
         byte[] publicKey = getPublicKey(keys);
         byte[] privateKey = getPrivateKey(keys);
-//        System.out.println("公钥："+Base64.encode(publicKey));
-//        System.out.println("私钥："+ Base64.encode(privateKey));
         System.out.println("公钥："+Base64.encode(publicKey));
         System.out.println("私钥："+ Base64.encode(privateKey));
 
@@ -93,9 +91,9 @@ public class RSAUtils {
     public static byte[] encryptByPrivateKey(byte[] data,byte[] key) throws Exception{
 
         //取得私钥
-        PKCS8EncodedKeySpec pkcs8KeySpec=new PKCS8EncodedKeySpec(key);
         KeyFactory keyFactory=KeyFactory.getInstance(RSA_ALGORITHM);
         //生成私钥
+        PKCS8EncodedKeySpec pkcs8KeySpec=new PKCS8EncodedKeySpec(key);
         PrivateKey privateKey=keyFactory.generatePrivate(pkcs8KeySpec);
         //数据加密
         Cipher cipher=Cipher.getInstance(keyFactory.getAlgorithm());
@@ -119,7 +117,7 @@ public class RSAUtils {
             InvalidKeySpecException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException, InvalidKeyException {
         //实例化密钥工厂
         KeyFactory keyFactory = KeyFactory.getInstance(RSA_ALGORITHM);
-        //初始化公钥,根据给定的编码密钥创建一个新的 X509EncodedKeySpec。
+        //初始化公钥,根据给定的编码密钥创建一个新的 X509EncodedKeySpec。X.509 是密码学里公钥证书的格式标准
         X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(key);
         PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
         //数据加密
