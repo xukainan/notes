@@ -1,6 +1,5 @@
 package top.uaian.mybatisplus.dbconfig;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import top.uaian.mybatisplus.model.DbContextHolder;
 
@@ -10,7 +9,6 @@ import top.uaian.mybatisplus.model.DbContextHolder;
  * @author: xukainan <br>
  * version: 1.0 <br>
  */
-@Configuration
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override

@@ -159,7 +159,7 @@ public class DataSourceConfig {
 
     @Bean
     @Primary
-    DynamicDataSource dynamicDataSource() throws Exception {
+    DynamicDataSource dataSource() throws Exception {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object,Object> targetDataSource = new HashMap<>();
         Map<String, SQLDriverItem> sqlDriverItemMaps = getSQLDriverItemMap(location);

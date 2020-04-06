@@ -24,10 +24,10 @@ public class DataSourceAspect {
 
     private Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
 
-    @Pointcut("execution(* top.uaian.mybatisplus.dao.sel*(..))" +
-                "|| execution(* top.uaian.mybatisplus.dao.count*(..))" +
-            "|| execution(* top.uaian.mybatisplus.dao.find*(..))" +
-            "|| execution(* top.uaian.mybatisplus.dao.get*(..))")
+    @Pointcut("execution(* top.uaian.mybatisplus.dao.*Mapper.sel*(..))" +
+                "|| execution(* top.uaian.mybatisplus.dao.*Mapper.count*(..))" +
+            "|| execution(* top.uaian.mybatisplus.dao.*Mapper.find*(..))" +
+            "|| execution(* top.uaian.mybatisplus.dao.*Mapper.get*(..))")
     private void db_read(){}
 
     @Before("db_read()")
@@ -46,11 +46,11 @@ public class DataSourceAspect {
         DbContextHolder.clearDbType();
     }
 
-    @Pointcut("execution(* top.uaian.mybatisplus.dao.insert*(..))"+
-            "|| execution(* top.uaian.mybatisplus.dao.update*(..))" +
-            "|| execution(* top.uaian.mybatisplus.dao.wget*(..))" +
-            "|| execution(* top.uaian.mybatisplus.dao.save*(..))" +
-            "|| execution(* top.uaian.mybatisplus.dao.del*(..))"
+    @Pointcut("execution(* top.uaian.mybatisplus.dao.*Mapper.insert*(..))"+
+            "|| execution(* top.uaian.mybatisplus.dao.*Mapper.update*(..))" +
+            "|| execution(* top.uaian.mybatisplus.dao.*Mapper.wget*(..))" +
+            "|| execution(* top.uaian.mybatisplus.dao.*Mapper.save*(..))" +
+            "|| execution(* top.uaian.mybatisplus.dao.*Mapper.del*(..))"
     )
     private void db_write(){};
 
