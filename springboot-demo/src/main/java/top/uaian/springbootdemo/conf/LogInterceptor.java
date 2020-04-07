@@ -23,7 +23,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("请求的路径为: "+ request.getRequestURI() + ", 请求的参数为：" + JSON.toJSONString(request.getParameterMap()));
+//        logger.info("请求的路径为: "+ request.getRequestURI() + ", 请求的参数为：" + JSON.toJSONString(request.getParameterMap()));
         return true;
     }
 }

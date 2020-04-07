@@ -1,9 +1,13 @@
 package top.uaian.tool.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * description:  Redis分布式锁简单实现<br>
@@ -11,16 +15,20 @@ import java.util.Date;
  * @author: xukainan <br>
  * version: 1.0 <br>
  */
+@Component
 public class RedisLockUtils {
 
-    static StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
-    private static final long expireTime = 60;
+    private final long expireTime = 6000;
 
-    public static boolean lock(String key){
+    public boolean lock(String key){
         long time = new Date().getTime();
         String value = String.valueOf(time + expireTime);
-        stringRedisTemplate.opsForValue().setIfAbsent(key, value);
+        if(stringRedisTemplate.opsForValue().setIfAbsent(key, value)) {
+            return true;
+        }
         //处理“锁已经过期，但是没有运行解锁操作”
         //假设获取的值是a
         String currentValue = stringRedisTemplate.opsForValue().get(key);
@@ -39,10 +47,11 @@ public class RedisLockUtils {
         return false;
     }
 
-    public static boolean unlock(String key, String value){
+    public boolean unlock(String key, String value){
+        Long l = Long.parseLong(value) + expireTime;
         Boolean isDelete = false;
         String currentValue = stringRedisTemplate.opsForValue().get(key);
-        if(!StringUtils.isEmpty(currentValue) && currentValue.equals(value)) {
+        if(!StringUtils.isEmpty(currentValue) && currentValue.equals(l.toString())) {
             isDelete = stringRedisTemplate.opsForValue().getOperations().delete(key);
         }
         return isDelete;
