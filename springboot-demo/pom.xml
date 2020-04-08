@@ -50,6 +50,11 @@
             <version>1.2.62</version>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.2-jre</version>
+        </dependency>
+        <dependency>
             <groupId>top.uaian</groupId>
             <artifactId>tool</artifactId>
             <version>0.0.1-SNAPSHOT</version>
