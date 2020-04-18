@@ -5,12 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -31,12 +28,11 @@ public class RedisMQUtils {
         Map<String,String> map = new HashMap<>();
         map.put("orderId", msg);
         Long result = redisTemplate.opsForList().leftPush(key, map);
-//        Properties info = redisTemplate.getRequiredConnectionFactory().getConnection().info("server");
-//        System.out.println(redisTemplate.opsForList().rightPop(key, 40, TimeUnit.SECONDS));
+        Properties info = redisTemplate.getRequiredConnectionFactory().getConnection().info("server");
+        System.out.println(redisTemplate.opsForList().rightPop(key, 40, TimeUnit.SECONDS));
         return result;
     }
 
-    @PostConstruct
     public void consumer(){
         String key = "myorder";
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -44,7 +40,7 @@ public class RedisMQUtils {
             while (true) {
                 Object o = redisTemplate.opsForList().rightPop(key, 40, TimeUnit.SECONDS);
                 String msg = JSON.toJSONString(o);
-                if(msg == null) {
+                if(msg == "null") {
                     continue;
                 }
                 System.out.println("已经消费消息:" + msg);
