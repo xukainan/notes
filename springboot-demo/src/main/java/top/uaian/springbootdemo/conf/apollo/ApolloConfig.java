@@ -24,7 +24,7 @@ public class ApolloConfig {
                         if(Objects.equals(curEnv, "dev")) {
                             System.setProperty("env", "dev");
                             //apollo.meta的地址
-                            System.setProperty("apollo.meta", "http://www.xukainan.top:8080");
+                            System.setProperty("apollo.configService", "http://35.194.228.134:8080");
                             //在应用启动阶段，向Spring容器注入被托管的application.properties文件的配置信息。
                             System.setProperty("apollo.bootstrap.enabled", "true");
                             //apollo的命名空间
@@ -36,10 +36,6 @@ public class ApolloConfig {
                 }
             }
         }
-        Config config = ConfigService.getAppConfig();
-        String serverport = "20101";
-        serverport = config.getProperty("server.port", serverport);
-        System.out.println(serverport);
     }
 
 }
