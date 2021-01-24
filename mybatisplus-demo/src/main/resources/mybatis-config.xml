@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入外部资源文件和使用-->
+    <!-- 加载规则，首先加载标签内部属性，再加载外部文件，名称相同时，会替换相同名称的内容 -->
+    <!--    <properties resource="db.properties"></properties>-->
+    <!--    <environments default="development">-->
+    <!--        <environment id="development">-->
+    <!--            <transactionManager type="JDBC"/>&lt;!&ndash; 单独使用时配置成MANAGED没有事务 &ndash;&gt;-->
+    <!--            <dataSource type="POOLED">-->
+    <!--                <property name="driver" value="${jdbc.driver}"/>-->
+    <!--                <property name="url" value="${jdbc.url}"/>-->
+    <!--                <property name="username" value="${jdbc.username}"/>-->
+    <!--                <property name="password" value="${jdbc.password}"/>-->
+    <!--            </dataSource>-->
+    <!--        </environment>-->
+    <!--    </environments>-->
+    <settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!--设置驼峰匹配-->
+<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+        <!-- 控制全局缓存（二级缓存）-->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。默认 false  -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 当开启时，任何方法的调用都会加载该对象的所有属性。默认 false，可通过select标签的 fetchType来覆盖-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--  Mybatis 创建具有延迟加载能力的对象所用到的代理工具，默认JAVASSIST -->
+        <!--<setting name="proxyFactory" value="CGLIB" />-->
+        <!-- STATEMENT级别的缓存，使一级缓存，只针对当前执行的这一statement有效 -->
+        <!-- <setting name="localCacheScope" value="STATEMENT"/>-->
+        <setting name="localCacheScope" value="SESSION"/>
+    </settings>
+
+
+    <!--设置包扫描，别名-->
+    <typeAliases>
+<!--        <typeAlias alias="blog" type="com.wuzz.domain.Blog" />-->
+        <!-- 别名包扫描器(推荐使用此方式)，整个包下的类都被定义别名，别名为类名，不区分大小写-->
+        <package  name="top.uaian.mybatisplus.model"/>
+    </typeAliases>
+
+    <!--    <typeHandlers>
+            <typeHandler handler="com.wuzz.type.MyTypeHandler"></typeHandler>
+        </typeHandlers>-->
+
+    <!-- 对象工厂 -->
+    <!--    <objectFactory type="com.wuzz.objectfactory.GPObjectFactory">
+            <property name="wuzz" value="666"/>
+        </objectFactory>-->
+
+    <!--    <plugins>
+            <plugin interceptor="com.wuzz.interceptor.SQLInterceptor">
+                <property name="wuzz" value="betterme" />
+            </plugin>
+            <plugin interceptor="com.wuzz.interceptor.MyPageInterceptor">
+            </plugin>
+        </plugins>-->
+
+    <!-- 配置环境：可以配置多个环境，default：配置某一个环境的唯一标识，表示默认使用哪个环境 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/><!-- 单独使用时配置成MANAGED没有事务 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/sakila"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 配置映射文件：用来配置sql语句和结果集类型等 -->
+    <mappers>
+        <!-- 第一种方式，加载 resource-->
+         <mapper resource="mapper/ActorMapper.xml"/>
+        <!-- 第二种方式，class扫描器要求：
+             1、映射文件与接口同一目录下
+             2、映射文件名必需与接口文件名称一致
+         -->
+        <!-- <mapper class="com.itheima.mybatis.mapper.UserMapper"/> -->
+        <!-- 第三种方式，包扫描器要求(推荐使用此方式)：
+             1、映射文件与接口同一目录下
+             2、映射文件名必需与接口文件名称一致
+        -->
+<!--        <package name="com.itheima.mybatis.mapper"/>-->
+
+
+    </mappers>
+
+
+</configuration>

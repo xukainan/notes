@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.uaian.mybatisplus.dao.ActorMapper">
+    <select id="getActorByID" parameterType="int" resultType="top.uaian.mybatisplus.model.Actor">
+        select * from `actor` where actor_id = #{id}
+    </select>
+
+</mapper>
