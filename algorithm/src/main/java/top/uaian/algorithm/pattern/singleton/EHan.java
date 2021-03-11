@@ -1,4 +1,4 @@
-package top.uaian.algorithm.pattern.Singleton;
+package top.uaian.algorithm.pattern.singleton;
 
 /**
  * description:  饿汉式单例模式<br>

@@ -1,4 +1,4 @@
-package top.uaian.algorithm.pattern.Singleton;
+package top.uaian.algorithm.pattern.singleton;
 
 import java.util.concurrent.Executors;
 
