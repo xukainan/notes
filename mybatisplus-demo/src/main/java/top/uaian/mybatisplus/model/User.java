@@ -25,4 +25,6 @@ public class User {
 
     @TableField("age")
     private int age;
+
+    private String address;
 }
